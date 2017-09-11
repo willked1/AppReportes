@@ -14,11 +14,11 @@ public class Condicion {
     
     private Atributo atributo;
     private Object valor;
-    private String tipo_condicion;
+    private String tipoCondicion;
 
     public Condicion(Atributo atributo, String tipo_condicion, Object valor) {
         this.atributo = atributo;
-        this.tipo_condicion = tipo_condicion;
+        this.tipoCondicion = tipo_condicion;
         this.valor = valor;
     }
 
@@ -38,19 +38,19 @@ public class Condicion {
         this.valor = valor;
     }
 
-    public String getTipo_condicion() {
-        return tipo_condicion;
+    public String getTipoCondicion() {
+        return tipoCondicion;
     }
 
-    public void setTipo_condicion(String tipo_condicion) {
-        this.tipo_condicion = tipo_condicion;
+    public void setTipoCondicion(String tipoCondicion) {
+        this.tipoCondicion = tipoCondicion;
     }
 
     @Override
     public String toString() {
         if(valor instanceof String){
-            return atributo.getNombre() + " " + this.tipo_condicion + " '" + valor.toString() + "'";
+            return atributo.getNombre() + " " + this.tipoCondicion + " '" + valor.toString() + "'";
         }
-        return atributo.getNombre() + " " + this.tipo_condicion + " " + valor.toString();
+        return atributo.getNombre() + " " + this.tipoCondicion + " " + valor.toString();
     }        
 }
