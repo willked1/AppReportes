@@ -58,11 +58,13 @@ public class GUIReporte extends javax.swing.JFrame {
             elements = new ArrayList<>();
             String cad = "SELECT column_name, data_type, data_length FROM user_tab_cols WHERE table_name = '" + pNomTabla +"'";
             ResultSet rs = conn.executeQueryStatement(cad);
+            this.cbCon1.addItem("Seleccione una tabla");
             while(rs.next())
             {
                 Atributo x = new Atributo(rs.getString(1), rs.getString(2), rs.getInt(3));
                 elements.add(x);
                 model.addElement(x.getNombre());
+                this.cbCon1.addItem(x.getNombre());
                 listTabla.setModel(model);
                 
             }
@@ -71,7 +73,12 @@ public class GUIReporte extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "ups mejodí.");
         }
     }
-           
+       
+    public void condicion()
+    {
+        
+    }
+    
     public void obtenerElementos()
     {
         obtenidos = new ArrayList<>();
@@ -99,13 +106,24 @@ public class GUIReporte extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        cbTabla = new javax.swing.JComboBox<>();
+        cbTabla = new javax.swing.JComboBox<String>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listTabla = new javax.swing.JList<>();
+        listTabla = new javax.swing.JList<String>();
         jButton2 = new javax.swing.JButton();
+        cbCon1 = new javax.swing.JComboBox();
+        cbComparar = new javax.swing.JComboBox();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
+        cbComparar1 = new javax.swing.JComboBox();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Reporte");
+        setBackground(new java.awt.Color(153, 153, 153));
 
         jButton1.setText("Buscar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -129,32 +147,89 @@ public class GUIReporte extends javax.swing.JFrame {
             }
         });
 
+        cbComparar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione una opcion", "Igual", "Menor", "Mayor", "buscar por palabra" }));
+
+        jLabel1.setText("1. Seleccione un dato ");
+
+        jLabel2.setText("2. Seleccione un valor o multiples valores para realizar la consulta");
+
+        jLabel3.setText("3. Selección de condiciones");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cbComparar1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione una opcion", "Igual", "Menor", "Mayor", "buscar por palabra" }));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setText("CONSULTA APLI-REPORTE");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(cbTabla, 0, 155, Short.MAX_VALUE)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbCon1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cbComparar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cbComparar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cbTabla, 0, 538, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton2))))
+                        .addGap(26, 26, 26))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(42, Short.MAX_VALUE)
-                .addComponent(cbTabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addGap(32, 32, 32)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addGap(49, 49, 49)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbTabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(24, 24, 24)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbCon1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbComparar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbComparar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addGap(51, 51, 51))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
@@ -185,10 +260,20 @@ public class GUIReporte extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox cbComparar;
+    private javax.swing.JComboBox cbComparar1;
+    private javax.swing.JComboBox cbCon1;
     private javax.swing.JComboBox<String> cbTabla;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JList<String> listTabla;
     // End of variables declaration//GEN-END:variables
 }
