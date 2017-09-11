@@ -169,7 +169,7 @@ public class GUIReporte extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         String nomTabla = cbTabla.getSelectedItem().toString();
-        System.out.println(nomTabla);
+        //System.out.println(nomTabla);
         generarList(nomTabla);
 
     }//GEN-LAST:event_jButton1ActionPerformed
