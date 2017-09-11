@@ -12,22 +12,22 @@ package model;
 public class Condicion {
     public final static String[] TIPO_CONDICIONES = new String[]{"=", "<", ">", "like"};
     
-    private String nombreAtributo;
+    private Atributo atributo;
     private Object valor;
     private String tipo_condicion;
 
-    public Condicion(String nombreAtributo, String tipo_condicion, Object valor) {
-        this.nombreAtributo = nombreAtributo;
+    public Condicion(Atributo atributo, String tipo_condicion, Object valor) {
+        this.atributo = atributo;
         this.tipo_condicion = tipo_condicion;
         this.valor = valor;
     }
 
-    public String getNombreAtributo() {
-        return nombreAtributo;
+    public Atributo getAtributo() {
+        return atributo;
     }
 
-    public void setNombreAtributo(String nombreAtributo) {
-        this.nombreAtributo = nombreAtributo;
+    public void setAtributo(Atributo atributo) {
+        this.atributo = atributo;
     }
 
     public Object getValor() {
@@ -49,8 +49,8 @@ public class Condicion {
     @Override
     public String toString() {
         if(valor instanceof String){
-            return nombreAtributo + " " + this.tipo_condicion + " '" + valor.toString() + "'";
+            return atributo.getNombre() + " " + this.tipo_condicion + " '" + valor.toString() + "'";
         }
-        return nombreAtributo + " " + this.tipo_condicion + " " + valor.toString();
+        return atributo.getNombre() + " " + this.tipo_condicion + " " + valor.toString();
     }        
 }
