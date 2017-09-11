@@ -26,6 +26,7 @@ public class GUIReporte extends javax.swing.JFrame {
     private ConexionBD conn;
     private ArrayList<Atributo> elements;
     private ArrayList<Atributo> obtenidos;
+    private ArrayList consulta;
     
     /**
      * Creates new form GUIReporte
@@ -74,11 +75,35 @@ public class GUIReporte extends javax.swing.JFrame {
         }
     }
        
-    public void condicion()
+    public void condicionSinWhere() throws SQLException
     {
+        String nomTabla = cbTabla.getSelectedItem().toString();
+        String obt = "";       
         
+        for (int i = 0; i < obtenidos.size(); i++) {
+            obt += obtenidos.get(i).getNombre()+",";
+        }
+        obt = obt.substring(0,obt.length()-1);
+        
+        String cad = "select "+ obt +" from " + nomTabla;
+        System.out.println(cad);
+        consulta = new ArrayList();
+        ResultSet rs = conn.executeQueryStatement(cad);
+        
+        while(rs.next())
+        {
+            consulta.add(rs.getString(1));
+               
+        }
+        generarList();
     }
     
+    public void generarList()
+    {
+        for (int i = 0; i < elements.size(); i++) {
+            System.out.println(consulta.get(i).toString());
+        }
+    }
     public void obtenerElementos()
     {
         obtenidos = new ArrayList<>();
@@ -250,11 +275,15 @@ public class GUIReporte extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-//        for (int i = 0; i < elements.size(); i++) {
+        try {
+            //        for (int i = 0; i < elements.size(); i++) {
 //            System.out.println(elements.get(i).getNombre()+ " "+elements.get(i).getTipoDato()+" "+elements.get(i).getLongitud());
 //        }
-        obtenerElementos();
-        
+            obtenerElementos();
+            condicionSinWhere();
+        } catch (SQLException ex) {
+            Logger.getLogger(GUIReporte.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
